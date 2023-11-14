@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form | homework</title>
+</head>
+<body>
+    <form action="" method="get">
+        <fieldset>
+            <legend>납품자정보</legend>
+            <ul>
+                <li style="list-style: decima;">
+                    <label for="name">납품자 명(필수)</label>
+                    <input 
+                    type="text"
+                    id="name"
+                    name="name"
+                    required>
+                </li>
+                <br>
+                <li style="list-style: decima;">
+                    <label for="memberEmail">email(필수)</label>
+                    <input type="email" name="memberEmail" id="memberEmail">
+                </li>
+                <br>
+                <li style="list-style: decima;">
+                    <label for="homepage">홈페이지</label>
+                    <input type="url" name="homepage" id="homepage" value="https://">
+                </li>
+                <br>
+                <li style="list-style: decima;">
+                    <label for="region">지역</label>
+                    <select name="region" id="region">
+                        <option value="부산"></option>
+                        <option value="울산"></option>
+                        <option value="마산"></option>
+                    </select>
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>납품 정보</legend>
+            <ul>
+                <li>
+                    <label for="productName">상품명(필수) : </label>
+                    <input
+                    type="text"
+                    name="productName"
+                    id="productName"
+                    required>
+                </li>
+                <br>
+                <li>
+                    <label for="productCnt">납품수량(필수) : </label>
+                    <input
+                    type="number"
+                    name="productCnt"
+                    id="productCnt"
+                    min="100"
+                    placeholder="최소 100"
+                    required>
+                </li>
+                <br>
+                <li>
+                    <label for="productGrade">납품등급(필수) : </label>
+                    <input
+                    type="range"
+                    name="productGrade"
+                    id="productGrade"
+                    required>
+                </li>
+                <br>
+                <li>
+                    <label for="etc">기타사항 : </label>
+                    <textarea cols="30" rows="3">
+                    </textarea>
+                </li>
+            </ul>
+        </fieldset>
+        <br>
+
+        <input type="submit" value="send message">
+    </form>
+    
+    
+
+    
+</body>
+</html>
