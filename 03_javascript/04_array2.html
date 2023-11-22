@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열2 실습문제</title>
+    <style>
+         table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        #resume {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1>배열2 실습문제</h1>
+    <h3>1번</h3>
+    <p>1. #drink 하위의 li 태그의 text를 읽어서 모두 대문자로 변환된 배열로 만들어 보세요.</p>
+    <button onclick="test1();">1번</button>
+    <ul id="drink">
+        <li>coffee</li>
+        <li>cocktail</li>
+        <li>juice</li>
+        <li>beer</li>
+        <li>whiskey</li>
+    </ul>
+
+
+    <h3>2번</h3>
+    <p>csv 데이터를 테이블 태그로 출력하세요.</p>
+    <button onclick="test2();">2번</button>
+    <table id="contact">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>전화번호</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+    <h3>3번</h3>
+    <p>table태그 하위 데이터에 정렬 기능을 추가하세요.</p>
+    <button onclick="sortContactByName('asc')">이름 오름차순</button>
+    <button onclick="sortContactByName('desc')">이름 내림차순</button>
+    <button onclick="sortContactByAge('asc')">나이 오름차순</button>
+    <button onclick="sortContactByAge('desc')">나이 내림차순</button>
+
+
+    <script src="js/04_array.js"></script>
+</body>
+</html>
