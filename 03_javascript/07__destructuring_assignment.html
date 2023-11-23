@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구조 분해 할당 실습문제</title>
+</head>
+<body>
+    <h1>구조 분해 할당 실습문제</h1>
+    <h3>1번</h3>
+    <button onclick="test1();">1번</button>
+    <div>
+        <p>
+            csv데이터를 다음과 같이 출력하세요. <br><br>
+            홍길동(남) 평균 80.0점 <br>
+            신사임당(여) 평균 79.3점 <br>
+            전봉준(남) 평균 70.7점 <br>
+        </p>
+    </div>
+
+    <h3>2번</h3>
+    <button onclick="test2();">2번</button>
+    <div>
+        <p>
+            다음 회원객체 정보에서 가족관계를 다음과 같이 출력 <br><br>
+            이름 : 홍길동, 아빠 : 홍석천, 엄마 : 홍진경, 형제자매 : 홍수아 <br>
+            이름 : 신사임당, 아빠 : 신동엽, 엄마 : 고두심, 형제자매 : 신하균 <br>
+            이름 : 이순신, 아빠 : 이경영, 엄마 : 이영자, 형제자매 : 이승환,아이유 <br>
+        </p>
+    </div>
+
+    <script>
+        const test1 = () => {
+            const data = "홍길동,남,90,80,70,60|신사임당,여,88,100,50|전봉준,남,55,80,77";
+            const temp = data.split('|');
+            const students = temp.map((s, i) => s.split(","));
+            students.forEach(csvData);
+
+        }
+
+        const csvData = ([name, gender, ...scores]) => {
+                const sum = scores
+                    .map((n) => Number(n))
+                    .reduce((sum, score) => sum + score);
+                const avg = Math.round((sum / scores.length) * 10) / 10;
+                console.log(`${name} (${gender}) - ${avg}점 `);
+        };
+    </script>
+</body>
+</html>

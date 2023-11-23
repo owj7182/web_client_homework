@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; /* 화면 높이의 100% */
+      overflow: hidden; /* 넘치는 부분 숨기기 */
+    }
+    
+    .half-text {
+        font-size: 3em; /* 원하는 폰트 크기로 조절하세요 */
+        overflow: hidden;
+        white-space: nowrap; /* 텍스트가 줄 바꿈하지 않도록 설정 */
+        animation: revealText 5s infinite; /* 텍스트를 화면에 표시하는데 걸리는 시간을 조절하세요 */
+        border-radius: 50% 100%;
+    }
+
+    @keyframes revealText {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 50vw; /* 화면 너비의 50%로 설정 */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="half-text">Hello World</div>
+</body>
+</html>
