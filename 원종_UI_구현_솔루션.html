@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI구현</title>    
+    <style>
+        body {
+            background-color: #deeaf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0; 
+        }
+        
+        fieldset {
+            width: 400px;
+            height: 500px;
+            background-color: #ededed;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 100px;
+        }
+
+        /* 가입버튼 */
+        button {
+            width: 400px;
+            height: 70px;
+            background-color: #c6dfb6;
+            color: #506c3c;
+            font-size: large;
+            font-weight: bold;
+        }
+
+        /* input박스 클릭시 테두리 없애기 */
+        input:focus {outline:none;}
+
+        /* 아이디 */
+        .username {
+            padding-bottom: 20px;
+        }
+        #username {
+            width: 270px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+        
+        /* 패스워드 */
+        .password {
+            padding-bottom: 20px;
+        }
+        #password {
+            width: 270px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+
+        /* 패스워드 확인 */
+        .checkPassword {
+            padding-bottom: 20px;
+        }
+        #checkPassword {
+            width: 270px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+
+        /* 이메일 */
+        .email {
+            padding-bottom: 30px;
+            width: 400px;
+        }
+        #email1 {
+            width: 123px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+        #email2 {
+            width: 123px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+        /* 주소 */
+        .address {
+            padding-bottom: 30px;
+            width: 400px;
+        }
+        #address1 {
+            width: 270px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+        #address2 {
+            width: 270px;
+            border: none;
+            border-bottom: dashed;
+            background-color: #ededed;
+        }
+    </style>
+</head>
+<body>
+    <form name="signupFrm" action="javascript:requestSignup();">
+        <fieldset>
+            <div class="username" style="height: 52px;">
+                <span style="padding-right: 56px; font-size: large; font-weight: 900;">아이디</span>
+                <input type="text" name="username" id="username" required onblur="checkblur(this);" onfocus="checkfocus(this);">
+                <span style="padding-left: 118px; font-weight: 100;">
+                    <sup class="reqMsg" style="display:none; color: red;">필수 입력사항 입니다.</sup>
+                </span>
+            </div>
+
+            <div class="password" style="height: 52px;">
+                <span style="padding-right: 39px; font-size: large; font-weight: 900;">패스워드</span> 
+                <input type="password" name="password" id="password" required onblur="checkblur(this);" onfocus="checkfocus(this);"><br>
+                <span style="padding-left: 118px; font-weight: 100;">
+                    <sup id="pwdMsg" style="display:none">영문자 대/소문자, 특수문자, 숫자 포함 8~32자</sup>
+                    <sup class="reqMsg" style="display:none; color: red;">필수 입력사항 입니다.</sup>
+                </span>
+            </div>
+
+            <div class="checkPassword" style="height: 52px;">
+                <span style="font-size: large; font-weight: 900;">패스워드 확인</span>
+                <input type="password" name="checkPassword" id="checkPassword" required onblur="checkblur(this);" onfocus="checkfocus(this);">
+                <span style="padding-left: 118px; font-weight: 100;">
+                    <sup class="reqMsg" style="display:none; color: red;">필수 입력사항 입니다.</sup>
+                </span>
+            </div>
+
+            <div class="email">
+                <span style="padding-right: 61px; font-size: large; font-weight: 900;">이메일</span>
+                <input type="text" name="email1" id="email1">@<input type="text" name="email2" id="email2">
+            </div>
+
+            <div class="address">
+                <span style="padding-right: 79px; font-size: large; font-weight: 900;">주소</span>
+                <input type="text" name="address1" id="address1"><br><br>
+                <span style="padding-left: 120px;"><input type="text" name="address2" id="address2"></span>
+            </div>
+
+            <div>
+                <button>가입</button>
+            </div>
+            
+        </fieldset>
+    </form>
+    <script>
+        const frm = document.signupFrm;
+        const username = frm.username;
+        const password = frm.password;
+        const checkPassword = frm['checkPassword'];
+        const email = frm.email1 + '@' + frm.email2; 
+        const address = frm.address1 + frm.address2; 
+
+        document.signupFrm.onsubmit = (e) => {
+            
+            // requied의 영향으로 뜨지 않는것 같다 required삭제 시 정상작동하는걸 볼 수 있다.
+            // if (!username.value || !password.value || !checkPassword.value) {
+            //     alert('필수 입력 항목입니다.');
+            //     e.preventDefault();
+            //     return false;
+            // } 
+
+            // 비밀번호 조건에 맞는 정규식 표현
+            const regexps = [/^.{8,32}$/, /[A-Za-z]/, /[0-9]/, /[!@#$%^&*()]/];
+            const value = password.value;
+   
+
+            // 비밀번호 유효성 검사
+            if(!regexps[0].test(value)) {
+                    alert('영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자');
+                    e.preventDefault();
+                    return;
+            }
+            // 영문자 포함
+            if(!regexps[1].test(value)) {
+                alert('영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자');
+                e.preventDefault();
+                return;
+            }
+            // 숫자 포함
+            if(!regexps[2].test(value)) {
+                alert('영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자');
+                e.preventDefault();
+                return;
+            }
+            // 특수문자(!@#$%^&*())포함
+            if(!regexps[3].test(value)) {
+                alert('영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자');
+                e.preventDefault();
+                return;
+            }
+
+            // 비밀번호 일치여부
+            if (password.value !== checkPassword.value) {
+                alert('두 비밀번호가 일치하지 않습니다.');
+                password.select(); 
+                e.preventDefault();
+                return false;
+            }
+        };
+
+        checkPassword.addEventListener('blur', (e) => {
+            if (password.value !== checkPassword.value) {
+                alert('두 비밀번호가 일치하지 않습니다.');
+                password.select(); 
+            }        
+        })
+
+
+        // 클릭시 문구
+        /*password.addEventListener('click', () => {
+            alert('영문자 대/소문자, 특수문자, 숫자 포함 8~32자');
+         });*/
+
+        
+        let pwdMsg = document.getElementById("pwdMsg");
+
+        // 패스워드 클릭시 "영문자 대/소문자, 특수문자, 숫자 포함 8~32자"문자 출력
+        password.addEventListener('click', () => {
+            console.log(pwdMsg);
+            pwdMsg.style.display="";
+        });
+
+        // focus에서 나갈 시 "영문자 대/소문자, 특수문자, 숫자 포함 8~32자" 문구 사라짐
+        password.addEventListener('blur', () => {
+            pwdMsg.style.display="none";
+        })
+
+        // input에 관한 분기처리
+        let reqMsgs = document.querySelectorAll('input');
+        reqMsgs.forEach((input, index) => {
+            input.addEventListener('click', () => {
+                for(let i = 0; i < index; i++){
+                    console.log(index)
+                    if(i < 3){
+                        checkblur(reqMsgs[i])
+                    }
+                }
+
+            });
+        });
+        
+        
+        function checkblur(e){
+            if(e.value == ""){
+                e.parentElement.querySelector('.reqMsg').style.display="";
+            }
+
+        }
+
+        function checkfocus(e){
+            e.parentElement.querySelector('.reqMsg').style.display="none";
+        }
+
+         // 폼 제출 여부
+        const requestSignup = () => {
+            console.log('회원가입 성공~ 😁');
+            alert(`${username.value} 회원가입을 환영합니다.`);
+            frm.reset();  
+        };
+    </script>
+</body>
+</html>

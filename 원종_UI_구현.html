@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> <!-- 온라인 방식 -->
+    <style>
+        
+        div{
+            box-sizing: border-box;
+            /*border: 1px solid red;*/
+            height: 20px;
+        }
+
+        .msg{
+            color: gray;
+        }
+
+        #background{
+            width: 1000px; 
+            height: 800px; 
+            border: 2px solid steelblue;
+            background-color: rgb(219, 234, 246);
+        }
+        #area{
+            border: 2px solid rgb(221, 226, 229);
+            background-color: rgb(237, 237, 237);
+            width: 400px;
+            height: 500px;
+            margin: 150px 300px;
+        }
+
+        table{
+            padding: 30px 2% 2% 2%;
+            width: 100%;
+            font-weight: 1000;
+            height: 100%;
+        }
+
+        .label{ 
+            height: 13%;
+            width: 30%;
+            padding-left: 10px;
+            font-size: 14px;
+            
+        }
+        .input{
+            box-sizing: border-box; 
+
+            padding: 0;
+            width: 95%;
+            border: none;
+            background-color: rgb(237, 237, 237);
+            border-bottom: 3px dashed;
+      
+        }
+
+        .submit{
+            background-color: rgb(197, 224, 178);
+            color: rgb(88, 116, 69);
+            font-size: 18px;
+            font-weight: 1000;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+        .submit:hover{
+            
+            cursor: pointer;
+        }
+
+        .submit:hover{
+            background-color: rgb(150, 173, 135);
+        }
+
+        .footer{
+            height: 10%;
+        }
+
+        #email1{
+            width: 100%;
+        }
+        #email2{
+            width: 80%;
+        }
+
+        sup{
+            font-size: 10px;
+        }
+
+        #address2{
+            padding-bottom: 15%;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+    <div id="background">
+
+        <form action="insert.me" method="post">
+            <div id="area">
+                <!-- <table border="1"> -->
+                <table>
+                    <tr>
+                        <td class="label">아이디</td>
+                        <td colspan="2" id="tdUserId">
+                            <input type="text" id="userId" name="userId" class="input" required onclick="c1();">       
+                            <div id="idMsg" class="msg">
+
+                            </div>
+                        
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">패스워드</td>
+                        <td colspan="2">
+                            <input type="password" id="password1" name="password1" class="input" required onclick="c2();">
+                            <div id="pwMsg1" class="msg">
+                                
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">패스워드 확인</td>
+                        <td colspan="2">
+                            <input type="password" id="password2" name="password2" class="input" required onclick="c1();">
+                            <div id="pwMsg2" class="msg">
+                                
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr id="emailForm">
+                        <td class="label">이메일</td>
+                        <td>
+                            <input type="text" id="email1" name="email" class="input" onclick="c3()">
+                        </td>
+                        <td>
+                            @<input type="text" id="email2" name="email" class="input" onclick="c3();">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">주소</td>
+                        <td colspan="2">
+                        <input type="text" name="address" class="input" onclick="c3();">
+                    </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2" id="address2">
+                            <input type="text" name="address" class="input" onclick="c3();">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="3" class="footer">
+                            <input type="submit" value="가입" class="submit">
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        const msg=document.getElementsByClassName("msg")
+        //console.dir(msg)
+        
+        function c1(){
+
+            for(let i=0; i<msg.length; i++){
+                msg[i].innerHTML = "";
+            }
+
+        }
+        
+        function c2(){
+            msg.innerHTML = "";
+            document.getElementById("pwMsg1").innerHTML = "<sup>영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자</sup>"
+            
+            
+        }
+        
+        function c3(){
+            const userId=document.getElementById("userId");
+            const password2=document.getElementById("password2");
+            
+            for(let i=0; i<msg.length; i++){
+                msg[i].innerHTML = "";
+            }
+        
+            if(userId.value==""){
+                document.getElementById("idMsg").innerHTML = "<sup>필수 입력 항목 입니다.</sup>";
+            }
+            if(password1.value==""){
+                document.getElementById("pwMsg1").innerHTML = "<sup>필수 입력 항목 입니다.</sup>";
+            }
+            if(password2.value==""){
+                document.getElementById("pwMsg2").innerHTML = "<sup>필수 입력 항목 입니다.</sup>";
+            }
+            
+        }
+
+    </script>
+
+</body>
+</html>

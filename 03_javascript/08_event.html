@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 실습문제</title>
+</head>
+<body>
+    <h1>이벤트 실습문제</h1>
+    <p>#btn-generate을 클릭하면, 아래 csv데이터를 가지고 button태그를 동적으로 생성합니다.
+        <br>
+        생성된 버튼 태그를 클릭하면, 각각의 url로 페이지 이동해야 합니다.
+    </p>
+    <button type="button" id="btn-generate">버튼생성</button>
+    <div class="btn-wrapper"></div>
+    
+    <script>
+        
+        // 주어진 csv데이터
+        const data = `네이버,https://www.naver.com
+구글,https://www.google.com
+W3C,https://www.w3.org/
+MDN Web,https://developer.mozilla.org/en-US/
+와삼,https://www.w3schools.com`;
+        
+        // 엔터로 자름
+        const temp = data.split('\n');
+        const website = temp.map((s, i) => s.split(","));
+
+        console.log(website);
+
+        // 클릭시 버튼 태그를 동적으로 생성
+        
+        document.addEventListener('DOMContentLoded', function() {
+            const button1 = document.createElement("button");
+            button1.type = "button";
+            button1.innerHTML = "data[0]";
+            button.className = '#btn1';
+
+            button.querySelector('#btn-generate').onclick = () => {}
+        })
+
+        
+        
+        
+
+    </script>
+</body>
+</html>
