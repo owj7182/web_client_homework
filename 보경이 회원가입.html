@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background-image: url(images/backgr.png); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 500px;
+            margin-inline-start: 500px;
+            margin-inline-end: 0px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: pink;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+        }
+
+        button:hover {
+            background-color: palevioletred;
+        }
+    </style>
+</head>
+<body>
+    
+    <form name="signupForm" action="javascript:saveInformation()">
+        <h2>회원가입</h2>
+        <label for="name1">이름</label>
+        <input type="text" id="name1" name="name1" placeholder="이름을 입력하세요." required>
+        
+        <label for="username">사용자 아이디</label>
+        <input type="text" id="username" name="username" placeholder="사용자 아이디는 5~12 글자 입니다." required>
+        
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" placeholder="비밀번호는 7~15자리 숫자/문자/특수문자 입니다." required>
+       
+        <label for="passwordCheck">비밀번호 확인</label>
+        <input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호는 7~15자리 숫자/문자/특수문자 입니다." required>
+
+        <label for="phone">전화번호</label>
+        <input type="text" id="phone" name="phone" placeholder="전화번호를 입력하세요('-' 포함해서 작성)." required>
+
+        <label for="email">이메일</label>
+        <input type="text" id="email" name="email" placeholder="이메일 형식으로 입력해주세요." required>
+       
+        <label for="address">주소</label>
+        <input type="text" id="address" name="address" placeholder="주소를 입력해주세요." required>
+        
+        <button type="submit">가입하기</button>
+        <div style="padding-top: 14px; padding-left: 400px; font-size: 30px;">
+            <a href="index.html">🔙</a>
+        </div>
+    </form>
+    <script>
+        const frm = document.signupForm;
+        const name1 = frm.name1
+        const username = frm.username;
+        const password = frm.password;
+        const passwordCheck = frm.passwordCheck;
+        const phone = frm.phone;
+        const email = frm.email;
+        const address = frm.adrress;
+        
+        document.signupForm.onsubmit = (e) => {
+            e.preventDefault();
+            const name1Val = name1.value;
+            const usernameVal = username.value;
+            const passwordVal = password.value;
+            const passwordCheckVal = passwordCheck.value;
+            const phoneVal = phone.value;
+            const emailVal = email.value;
+            const addressVal = address.value;
+
+            if (!name1Val) {
+                alert('이름을 입력해주세요.');
+                return false;
+            }
+            if (usernameVal.length < 5 || usernameVal.length > 12) {
+                alert('사용자 아이디는 5~12 글자여야 합니다.');
+                return false;
+            }
+
+            if (passwordVal.length < 7 || passwordVal.length > 15) {
+                alert('비밀번호는 7~15 글자여야 합니다.');
+                return false;
+            }
+
+            if (passwordVal !== passwordCheckVal) {
+                alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+                return false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailVal)) {
+                alert('올바른 이메일 형식이 아닙니다.');
+                return false;
+            }
+
+            const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+            if (!phoneRegex.test(phoneVal)) {
+                alert('전화번호 형식은 000-0000-0000 형식이어야 합니다.');
+                return false;
+            }
+
+            if (!addressVal) {
+                alert('주소를 입력해주세요.');
+                return false;
+            }
+            
+            
+            alert('회원가입이 완료되었습니다.');
+            saveInformation(); 
+            return true; 
+            
+
+        return false; 
+        };
+        
+    
+        //  localStorage에 저장
+        const saveInformation = () => {
+            // localStorage에 저장
+            // guestbooks로 저장된 배열이 있다면 그걸 사용. 없으면 새 배열 생성.
+            const userInformation = JSON.parse(localStorage.getItem('userInformation')) || [];
+            userInformation.push(new UserInformation(name1.value, username.value, password.value, passwordCheck.value, email.value, phone.value, address.value));
+            console.log(userInformation);
+        
+            localStorage.setItem('userInformation', JSON.stringify(userInformation));
+            // frm.reset();
+        };
+        
+        class UserInformation {
+            constructor(name1, username, password, passwordCheck, email, phone, address, createdAt = Date.now()) {
+                this.name1 = name1;
+                this.username = username;
+                this.password = password;
+                this.passwordCheck = passwordCheck;
+                this.email = email;
+                this.phone = phone;
+                this.address = address;
+                this.createdAt = createdAt;
+            }
+        };
+        
+
+    </script>
+</body>
+</html>
